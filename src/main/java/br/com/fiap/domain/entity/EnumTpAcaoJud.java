@@ -1,6 +1,6 @@
 package br.com.fiap.domain.entity;
 
-public enum TpAcaoJud {
+public enum EnumTpAcaoJud {
     AÇÃO_CIVIL(new TipoDeAcao(null, "Ação Civil")),
     AÇÃO_CRIMINAL(new TipoDeAcao(null, "Ação Criminal")),
     AÇÃO_TRABALHISTA(new TipoDeAcao(null, "Ação Trabalhista")),
@@ -16,7 +16,7 @@ public enum TpAcaoJud {
 
     private TipoDeAcao tipoDeAcao;
 
-    TpAcaoJud(TipoDeAcao tipoDeAcao) {
+    EnumTpAcaoJud(TipoDeAcao tipoDeAcao) {
         this.tipoDeAcao = tipoDeAcao;
     }
 

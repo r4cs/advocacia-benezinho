@@ -1,6 +1,6 @@
 package br.com.fiap.domain.entity;
 
-public enum UfBrasileiras {
+public enum EnumUfBrasileiras {
     AC(new Estado(null, "AC", "Acre")),
     AL(new Estado(null, "AL", "Alagoas")),
     AM(new Estado(null, "AM", "Amazonas")),
@@ -31,7 +31,7 @@ public enum UfBrasileiras {
 
     private Estado estado;
 
-    UfBrasileiras(Estado estado) {
+    EnumUfBrasileiras(Estado estado) {
         this.estado = estado;
     }
 

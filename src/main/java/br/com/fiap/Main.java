@@ -13,6 +13,8 @@ import java.util.List;
 public class Main {
     private static EntityManagerFactory factory = Persistence.createEntityManagerFactory("maria-db");
     private static EntityManager manager = factory.createEntityManager();
+
+
     public static void main(String[] args) {
 
         populateEstados();
@@ -80,57 +82,11 @@ public class Main {
 
     private static TipoDeAcao selecTipoDeAcao() {
         List<TipoDeAcao> listaAcoesJud = new ArrayList<>();
-        for (TpAcaoJud taj: TpAcaoJud.values()) {
+        for (EnumTpAcaoJud taj: EnumTpAcaoJud.values()) {
             listaAcoesJud.add(taj.getTipoDeAcao());
         }
         // incluir aqui JOPane
         return selectInfoTpAcao(listaAcoesJud);
-    }
-
-    private static Estado selectEstados() {
-        List<Estado> estadosBrasileiros = new ArrayList<>();
-        for (UfBrasileiras uf: UfBrasileiras.values()) {
-            estadosBrasileiros.add(uf.getEstado());
-            System.out.println("estado: " + uf.getEstado());
-        }
-        // incluir aqui JOPane
-        return selectInfoEstado(estadosBrasileiros);
-    }
-
-    private static void populateTipoDeAcao() {
-        for (TpAcaoJud taj: TpAcaoJud.values()) {
-            try {
-                manager.getTransaction().begin();
-                manager.persist(taj.getTipoDeAcao());
-                manager.getTransaction().commit();
-                System.out.println(taj.getTipoDeAcao());
-            } catch (Exception e) {
-                System.out.println("Erro em populateTpAcaoJud(): " + e);
-            }
-        }
-    }
-    private static void populateEstados() {
-        for (UfBrasileiras uf: UfBrasileiras.values()) {
-            try {
-                manager.getTransaction().begin();
-                manager.persist( uf.getEstado() );
-                manager.getTransaction().commit();
-                System.out.println( uf.getEstado() );
-            } catch (Exception e) {
-                System.out.println("Erro! em populateEstados(): " + e);
-            }
-        }
-    }
-
-    private static void CreateTpProcesso() {
-    manager.getTransaction().begin();
-    for (TipoDeAcao tda : TipoDeAcao.class.getEnumConstants()) {
-        TipoDeAcao tipoDeAcao = new TipoDeAcao();
-        tipoDeAcao.setNome(tda.getNome());
-
-        manager.persist(tipoDeAcao);
-    }
-        manager.getTransaction().commit();
     }
 
     private static TipoDeAcao selectInfoTpAcao(List<TipoDeAcao> options) {
@@ -144,6 +100,41 @@ public class Main {
                 options.get( 0 )
         );
         return selectedIndex;
+    }
+
+    private static Estado selectEstados() {
+        List<Estado> estadosBrasileiros = new ArrayList<>();
+        for (EnumUfBrasileiras uf: EnumUfBrasileiras.values()) {
+            estadosBrasileiros.add(uf.getEstado());
+            System.out.println("estado: " + uf.getEstado());
+        }
+        // incluir aqui JOPane
+        return selectInfoEstado(estadosBrasileiros);
+    }
+
+    private static void populateTipoDeAcao() {
+        for (EnumTpAcaoJud taj: EnumTpAcaoJud.values()) {
+            try {
+                manager.getTransaction().begin();
+                manager.persist(taj.getTipoDeAcao());
+                manager.getTransaction().commit();
+                System.out.println(taj.getTipoDeAcao());
+            } catch (Exception e) {
+                System.out.println("Erro em populateTpAcaoJud(): " + e);
+            }
+        }
+    }
+    private static void populateEstados() {
+        for (EnumUfBrasileiras uf: EnumUfBrasileiras.values()) {
+            try {
+                manager.getTransaction().begin();
+                manager.persist( uf.getEstado() );
+                manager.getTransaction().commit();
+                System.out.println( uf.getEstado() );
+            } catch (Exception e) {
+                System.out.println("Erro! em populateEstados(): " + e);
+            }
+        }
     }
 
     private static Estado selectInfoEstado(List<Estado> options) {

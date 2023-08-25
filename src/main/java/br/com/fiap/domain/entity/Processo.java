@@ -27,7 +27,7 @@ public class Processo {
     @JoinColumn(
             name = "ID_ADV",
             referencedColumnName = "ID_ADV",
-            foreignKey = @ForeignKey(name = "FK_ID_ADV"),
+            foreignKey = @ForeignKey(name = "FK_PCSSO_ADV"),
             nullable = false
     )
     private Advogado advogado;
@@ -36,7 +36,7 @@ public class Processo {
     @JoinColumn(
             name = "ID_TPACAO",
             referencedColumnName = "ID_TPACAO",
-            foreignKey = @ForeignKey(name="FK_ID_TPACAO"),
+            foreignKey = @ForeignKey(name="FK_PCSSO_ID_TPACAO"),
             nullable = false
     )
     private TipoDeAcao tipoDeAcao;

@@ -5,18 +5,18 @@ import jakarta.persistence.*;
 @Entity
 @Table(name="TB_ESTADO", uniqueConstraints = {
         @UniqueConstraint(
-                name="NM_ESTADO",
+                name="UK_NM_ESTADO",
                 columnNames = "NM_ESTADO"
         ),
         @UniqueConstraint(
-                name="UF_ESTADO",
+                name="UK_UF_ESTADO",
                 columnNames = "UF_ESTADO"
         )
 })
 public class Estado {
 
     @Id
-    @Column(name="ID_ESTADO", nullable = false)
+    @Column(name="ID_ESTADO")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_ESTADO")
     @SequenceGenerator(name = "SQ_ESTADO")
     private Long id;
