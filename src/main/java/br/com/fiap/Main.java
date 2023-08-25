@@ -24,21 +24,22 @@ public class Main {
             int escolha = showMenu();
 
             switch (escolha) {
-                case 1:
+                case 0:
                     inserirProcessos();
                     break;
-                case 2:
+                case 1:
                     consultaTodosProcessos();
                     break;
-                case 3:
+                case 2:
                     consultaProcesso();
                     break;
-                case 0:
+                case 3:
                     continuar = false;
                     break;
                 default:
                     System.out.println("Opção inválida.");
                     break;
+
             }
         }
 
@@ -65,9 +66,12 @@ public class Main {
         try {
             TypedQuery<Processo> query = manager.createQuery("SELECT p FROM Processo p", Processo.class);
             List<Processo> processos = query.getResultList();
-
-            for (Processo p : processos) {
-                System.out.println("Processo: " + p);
+            if (processos.isEmpty()) {
+                System.out.println("Não há processos cadastrados!");
+            } else {
+                for (Processo p : processos) {
+                    System.out.println("Processo: " + p);
+                }
             }
         } finally {
             System.out.println("Pesquisa encerrada.");
@@ -129,7 +133,6 @@ public class Main {
         manager.getTransaction().commit();
     }
 
-//    private static <T> T selectInfo(List<T> options) {
     private static TipoDeAcao selectInfoTpAcao(List<TipoDeAcao> options) {
         TipoDeAcao selectedIndex = (TipoDeAcao) JOptionPane.showInputDialog(
                 null,
@@ -196,6 +199,16 @@ public class Main {
 
     private static int showMenu() {
         String[] opcoes = {"Inserir Processo", "Consultar Todos os Processos", "Consultar Processo", "Sair"};
+//        System.out.println("OPCOES: " + JOptionPane.showOptionDialog(
+//                null,
+//                "Escolha uma opção:",
+//                "Menu",
+//                JOptionPane.DEFAULT_OPTION,
+//                JOptionPane.PLAIN_MESSAGE,
+//                null,
+//                opcoes,
+//                opcoes[0]
+//        ));
         return JOptionPane.showOptionDialog(
                 null,
                 "Escolha uma opção:",
