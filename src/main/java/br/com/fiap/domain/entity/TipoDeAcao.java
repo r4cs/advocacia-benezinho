@@ -1,10 +1,25 @@
 package br.com.fiap.domain.entity;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name="TB_TPACAO", uniqueConstraints = {
+        @UniqueConstraint(
+                name="NM_TPACAO",
+                columnNames = "NM_TPACAO"
+        )
+})
 public class TipoDeAcao {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_TPACAO")
+    @SequenceGenerator(name="SQ_TPACAO")
+    @Column(name="ID_TPACAO")
     private Long id;
 
+    @Column(name="NM_TPACAO", nullable = false)
     private String nome;
+
 
     public TipoDeAcao() {
     }

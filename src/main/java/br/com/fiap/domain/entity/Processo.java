@@ -1,16 +1,44 @@
 package br.com.fiap.domain.entity;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name="TB_PROCESSO", uniqueConstraints = {
+        @UniqueConstraint(
+                name = "NR_PROCESSO",
+                columnNames = {"NR_PROCESSO"})
+})
+
 public class Processo {
 
+    @Id
+    @Column(name="ID_PROCESSO")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_PROCESSO")
+    @SequenceGenerator(name="SQ_PROCESSO")
     private Long id;
 
+    @Column(name="NR_PROCESSO", nullable = false)
     private String numero;
 
+    @Column(name="IS_PBONO")
     private Boolean proBono;
 
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(
+            name = "ID_ADV",
+            referencedColumnName = "ID_ADV",
+            foreignKey = @ForeignKey(name = "FK_ID_ADV"),
+            nullable = false
+    )
     private Advogado advogado;
 
-
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(
+            name = "ID_TPACAO",
+            referencedColumnName = "ID_TPACAO",
+            foreignKey = @ForeignKey(name="FK_ID_TPACAO"),
+            nullable = false
+    )
     private TipoDeAcao tipoDeAcao;
 
 
@@ -74,11 +102,11 @@ public class Processo {
     @Override
     public String toString() {
         return "Processo{" +
-                "id=" + id +
-                ", numero='" + numero + '\'' +
-                ", proBono=" + proBono +
-                ", advogado=" + advogado +
-                ", tipoDeAcao=" + tipoDeAcao +
+                "\nid=" + id +
+                ", \nnumero='" + numero + '\'' +
+                ", \nproBono=" + proBono +
+                ", \nadvogado=" + advogado +
+                ", \ntipoDeAcao=" + tipoDeAcao +
                 '}';
     }
 }
